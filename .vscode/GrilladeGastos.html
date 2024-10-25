@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastos Registrados</title>
+    <link rel="stylesheet" href="./Css/grillaDeGastos.css">
+</head>
+<h2>Gastos Registrados</h2>
+<table id="gastosTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Los datos se insertarán aquí dinámicamente -->
+    </tbody>
+</table>
+
+<script>
+    fetch('/gastos/listar')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector("#gastosTable tbody");
+            data.forEach(gasto => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${gasto.id}</td>
+                    <td>${gasto.descripcion}</td>
+                    <td>${gasto.monto}</td>
+                    <td>${gasto.fecha}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+</script>

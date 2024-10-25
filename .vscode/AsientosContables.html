@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asientos Contables</title>
+    <link rel="stylesheet" href="./Css/asientosContables.css">
+</head>
+<body>
+<h2>Asientos Contables</h2>
+<table id="asientosTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Los datos se insertarán aquí dinámicamente -->
+    </tbody>
+</table>
+
+<script>
+    fetch('/asientos/listar')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector("#asientosTable tbody");
+            data.forEach(asiento => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${asiento.id}</td>
+                    <td>${asiento.tipo}</td>
+                    <td>${asiento.descripcion}</td>
+                    <td>${asiento.monto}</td>
+                    <td>${asiento.fecha}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+</script>
