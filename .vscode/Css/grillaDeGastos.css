@@ -41,6 +41,23 @@ tr:nth-child(even) {
     background-color: #f1f1f1;
 }
 
+.menu-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+    background-color: #0056b3;
+}
+
 @media screen and (max-width: 600px){
 
     body{

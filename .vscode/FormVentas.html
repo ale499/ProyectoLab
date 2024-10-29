@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="./Css/formVentas.css">
 </head>
 <body>
+
+    <!-- Botón de Menú -->
+    <button class="menu-btn" onclick="window.location.href='index.html'">Menú</button>
     <h1>Carrito de Compras</h1>
     <div id="carrito"></div>
 
@@ -16,8 +19,7 @@
         <label for="monto">Monto Total:</label>
         <input type="number" id="monto" name="monto" readonly required>
 
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required>
+       
 
         <!-- Nuevos campos para el destinatario -->
         <label for="nombreDestinatario">Nombre del destinatario:</label>
@@ -116,7 +118,31 @@
             localStorage.removeItem("carrito");
             alert("Compra registrada exitosamente.");
             window.location.reload();
-        }
+
+            // Crear un nuevo gasto
+        const nuevoGasto = {
+            id: Date.now(), // Usar la marca de tiempo como ID único
+            descripcion,
+            monto,
+            fecha,
+            nombreDestinatario,
+            telefono,
+            direccion
+        };
+
+        // Obtener los gastos existentes de localStorage
+        const gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+        gastos.push(nuevoGasto);
+
+        // Guardar la lista actualizada de gastos en localStorage
+        localStorage.setItem("gastos", JSON.stringify(gastos));
+
+        // Limpiar el carrito y mostrar mensaje de éxito
+        localStorage.removeItem("carrito");
+        alert("Compra registrada exitosamente.");
+        window.location.reload();
+    }
+        
     </script>
 
     

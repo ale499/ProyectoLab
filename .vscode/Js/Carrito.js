@@ -64,5 +64,11 @@ function registrarVenta() {
     } else {
         alert('Por favor, complete todos los campos');
     }
+
+    function cerrarSesion() {
+        // Aquí puedes limpiar el localStorage o cualquier lógica necesaria
+        localStorage.removeItem('usuario'); // Por ejemplo, si guardas usuario en localStorage
+        window.location.href = 'index.html'; // Redirige a la página principal
+    }
 }
 

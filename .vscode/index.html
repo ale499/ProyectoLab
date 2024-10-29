@@ -9,7 +9,20 @@
 <body>
     <header>
         <h1>Bienvenido al Menú de Comida</h1>
-        <button class="login-btn" onclick="window.location.href='registro.html'">Iniciar sesión</button>
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="window.location.href='registro.html'">Iniciar sesión</button>
+            <div class="dropdown">
+                <button class="dropdown-btn" onclick="toggleDropdown()">☰</button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <button onclick="window.location.href='grillaDeGastos.html'">Historial de Compras</button>
+                    <button onclick="cerrarSesion()">Cerrar Sesión</button>
+                </div>
+            </div>
+            <button class="cart-btn" onclick="irAlCarrito()">
+                <img src="./Imagenes/4305700.png" alt="Carrito" class="cart-icon">
+            </button>
+        </div>
+
     </header>
 
     <section class="menu">
@@ -47,8 +60,54 @@
     </section>
     
 
-    <button class="comprar" onclick="irAlCarrito()">Comprar</button>
-
     <script src="./Js/Carrito.js"></script>
+
+    <script>
+        // Verificar si el usuario está logueado
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+        // Elementos del DOM
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+
+        // Mostrar el botón de cerrar sesión y ocultar el de inicio de sesión si el usuario está logueado
+        if (isLoggedIn === 'true') {
+            loginButton.style.display = 'none';
+            logoutButton.style.display = 'inline-block';
+        }
+
+        // Función para cerrar sesión
+        function cerrarSesion() {
+            // Aquí puedes limpiar el localStorage o cualquier lógica necesaria
+            // Elimina el historial de gastos
+            localStorage.removeItem("gastos");
+            localStorage.removeItem('usuario'); // Por ejemplo, si guardas usuario en localStorage
+            window.location.href = 'index.html'; // Redirige a la página principal
+        }
+    </script>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("show");
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem("gastos");
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = 'index.html';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+    </script>
 </body>
 </html>
